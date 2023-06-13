@@ -1,44 +1,55 @@
-const today = new Date();           // the date of the day (change everyDay, Mon Jun 12 2023 )
-
-// Set the date
-const endDate = new Date("January 01, 2024 00:00:00"); // Mon Jan 01 2024  // same as (new Date("2024-01-01"))
-
-// Difference between Days 
-let diffHourDays = endDate.getTime() - today.getTime();
-
-let oneDay = 1000*60*60*24;
-let diffDay = Math.floor(diffHourDays / oneDay);
-
-// Difference between Date in hour 
-let hourDay = 1000*60*60;
-let diffHour = Math.floor(diffHourDays / hourDay);
+const datePrompt = require('date-prompt')
 
 
-// Difference between Date in hour (24 hours)
-let todayHour     = today.getHours();
-let endDateHour   = endDate.getHours();
+function enterTheBirthday(){
+datePrompt('When is your birthday?')
+.then(isoStr => console.log('Submitted with', isoStr))
+.catch(isoStr => console.log('Aborted with', isoStr))
+}
 
-let diff_24_Hour =  24-(todayHour-endDateHour);
+let yourBirthday = enterTheBirthday();
 
-// Difference between Date in Minute
-let todayMinute   = today.getMinutes();
-let endDateMinute = endDate.getMinutes();
+const today = new Date();
+// Enter the date manually inside the code
+// const birthDate = new Date("June 10, 1980, 10:15:00");
 
-let diffMinute = 60-(todayMinute-endDateMinute);
+const minuteDay = 1000*60;
 
-// Difference between Date in Seconds
-let todaySecond   = today.getSeconds();
-let endDateSecond = endDate.getSeconds();
 
-let diffSecond = 60-(todaySecond-endDateSecond);
+let diffDay = today-yourBirthday;
+let diffMinute = Math.floor(diffDay/minuteDay);
 
-//console.log("The fist January 2024 is in " + diffDay + " day(s) and " + diff_24_Hour +":"+ diffMinute+ ":" + diffSecond + " Hours  or " + diffHour + " Hour(s) until the day : " + endDate );
 
-module.exports = function(){
+module.exports = function (){
+    
     this.info = () =>{
-    console.log("The fist January 2024 is in " + diffDay + " day(s) and " + diff_24_Hour +":"+ diffMinute+ ":" + diffSecond + " Hours  or " + diffHour + " Hour(s) until the day : " + endDate );
+       console.log(" You live " + diffMinute + " minute until today " + " and you are born on the date : "+ yourBirthday );
     }
-};
+}
 
-//console.log(today.toDateString());
-//console.log(endDate.toDateString());
+
+
+
+/***********
+ *  
+ * 
+The code without module  date-prompt
+
+const today = new Date();
+// Enter the date manually inside the code
+// const birthDate = new Date("June 10, 1980, 10:15:00");
+//let diffDay = today-birthDate;
+//let diffMinute = Math.floor(diffDay/minuteDay);
+module.exports = function (){
+    this.info = () =>{
+       console.log(" You live " + diffMinute + " minute until today " + " and you are born on the date : "+ birthDate );
+    }
+}
+
+*/
+
+
+/**
+ *  Amodule to enter the date is npm install date-prompt
+*/
+
